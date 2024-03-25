@@ -1,3 +1,6 @@
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
@@ -38,14 +41,22 @@ public class Calculator {
 
 
 
-        int resul = calculate(a, b, new BiFunction<Integer, Integer, Integer>(){
-            @Override
-            public Integer apply(Integer a, Integer b) {
-                return a + b;
-            }
-        });
+        int resul = calculate(a, b, (x, y) -> x + y);
         System.out.println(resul);
 
+        Supplier<String> supplier = String :: new;
+        System.out.println(supplier.get());
+
+//        List<Integer> integers = Arrays.asList(1, 2, 3, 4);
+//        integers.forEach(System.out :: println);
+//
+//        //Consumer<String> consumer = str -> System.out.println(str);
+//        Consumer<String> consumer = Calculator :: print;
+
+    }
+
+    private static void print(String str) {
+        System.out.println(str);
     }
 
     private static int calculate(int a, int b, BiFunction<Integer, Integer, Integer> action) {
